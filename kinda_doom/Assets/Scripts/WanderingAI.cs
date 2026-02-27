@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WanderingAI : MonoBehaviour
 {
+    public const float baseSpeed = 3.0f;
     public float speed = 3.0f;
     public float obstacle_Range = 5.0f; // дистанция, на которой мы будем обнаруживать препятствия
 
@@ -14,7 +15,7 @@ public class WanderingAI : MonoBehaviour
     {
         _alive = true;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (_alive)
@@ -44,5 +45,22 @@ public class WanderingAI : MonoBehaviour
     public void SetAlive(bool alive) // из других скриптов имеем доступ к параметру
     {
         _alive = alive;
+    }
+
+    // управление событиями
+    private void OnEnable()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    private void OnDisable()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    // функция, которая "обрабатывает" событие
+    private void OnSpeedChanged(float value)
+    {
+        speed = value * baseSpeed;
     }
 }

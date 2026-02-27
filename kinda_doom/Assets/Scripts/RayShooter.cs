@@ -1,23 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RayShooter : MonoBehaviour
 {
     private Camera _camera;
+    [SerializeField] private Texture crosshair; // значок прицеливания
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _camera = GetComponent<Camera>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 point = new Vector3(_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0);
             Ray ray = _camera.ScreenPointToRay(point);
@@ -29,6 +28,7 @@ public class RayShooter : MonoBehaviour
                 if (target != null) // если попали в врага
                 {
                     target.ReactToHit();
+                    Messenger.Broadcast(GameEvent.ENEMY_HIT);
                 }
                 else
                 {
@@ -41,12 +41,12 @@ public class RayShooter : MonoBehaviour
 
     private void OnGUI()
     {
-        int size = 12;
-        float posX = _camera.pixelWidth / 2 - size/4;
-        float posY = _camera.pixelHeight / 2 - size/2;
-        GUI.Label(new Rect(posX, posY, size, size), "*");
-
+        int size = 36;
+        float posX = _camera.pixelWidth / 2 - size / 4;
+        float posY = _camera.pixelHeight / 2 - size / 2;
+        GUI.Label(new Rect(posX, posY, size, size), crosshair);
     }
+
     // возникновение сферы на месте попадания
     private IEnumerator SphereIndicator(Vector3 pos)
     {

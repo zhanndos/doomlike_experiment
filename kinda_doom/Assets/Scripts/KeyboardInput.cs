@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class KeyboardInput : MonoBehaviour
 {
+    public const float baseSpeed = 10.0f;
     public float speed = 10.0f;
 
     private CharacterController _characterController;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         float deltaX = Input.GetAxis("Horizontal");
@@ -24,5 +25,19 @@ public class KeyboardInput : MonoBehaviour
         _characterController.Move(movement * speed * Time.deltaTime);
 
     }
-    
+
+    void OnEnable()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+    void OnDisable()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    private void OnSpeedChanged(float value)
+    {
+        speed = baseSpeed * value;
+    }
+
 }
