@@ -42,9 +42,5 @@ public class MouseLook : MonoBehaviour
 
             transform.localRotation = Quaternion.Euler(_xRotation, 0, 0); // вращение камеры относительно игрока
         }
-        else
-        {
-            //
-        }
     }
 }

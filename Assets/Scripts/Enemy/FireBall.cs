@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FireBall : MonoBehaviour
@@ -11,11 +12,12 @@ public class FireBall : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        PlayerCharacter player = other.GetComponent<PlayerCharacter>();
-        if (player != null ) // значит попали по игроку
+        IDamageable damageable = other.GetComponent<IDamageable>();
+        if (damageable != null )
         {
-            player.TakeDamage(damage);
+            damageable.TakeDamage(damage);
         }
         Destroy(this.gameObject);
     }
+
 }

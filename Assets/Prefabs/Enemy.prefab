@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6492733344890966216}
   - component: {fileID: 7736866341878744623}
   - component: {fileID: 3663965533732674238}
-  - component: {fileID: 1611704207295330869}
+  - component: {fileID: 9005830476486772313}
+  - component: {fileID: 466698125577739455}
+  - component: {fileID: 6996792419295467465}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -91,6 +93,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7736866341878744623
 BoxCollider:
@@ -125,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360954525f8e76e4b875db919a724407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActiveTarget
---- !u!114 &1611704207295330869
+--- !u!114 &9005830476486772313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,9 +137,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 8563666729118911754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013dc76546896f5448b42288e2457cbe, type: 3}
+  m_Script: {fileID: 11500000, guid: c450c9da0e03e5b488aebf584152ba08, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WanderingAI
-  speed: 3
-  obstacle_Range: 5
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMover
+  speed: 0
+--- !u!114 &466698125577739455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8563666729118911754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d161db3e73b0fb74dbb59a13fffc7ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
   _fireballPrefab: {fileID: 7828072338522730941, guid: e8f530b44a043854ca0e41d1b82c2ae3, type: 3}
+--- !u!114 &6996792419295467465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8563666729118911754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a766f3800c46a44099a2b9ad1a28bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleDetecter
+  obstacleRange: 5
