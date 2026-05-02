@@ -1,7 +1,7 @@
 
 ## Экспериментальное применение SOLID паттернов при разработке простого 3D-шутера.
 
-## 🏗️ Архитектура
+## Архитектура
 
 ### SOLID принципы в коде
 
@@ -64,13 +64,13 @@ UI/
 └── SettingsPopup    : MonoBehaviour (Broadcaster)
 ```
 
-## 📝 Заметки о коде
+## Заметки о коде
 
 - **Messenger.cs** — реализация типобезопасного event bus'а
 - Враги реагируют на `SPEED_CHANGED` через подписку в `OnEnable`/`OnDisable`
 - Система попаданий использует Interface Segregation: `IHittable` отделен от `IDamageable`
 
-## 🔄 Данные потоки
+## Данные потоки
 
 ```
 Input (Mouse Click)
